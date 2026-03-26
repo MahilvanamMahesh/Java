@@ -1,0 +1,287 @@
+Welcome to Github Action Trainings
+===
+
+Lab URL	https://digitallabs.palmeto.co.in
+
+No    	Participant Name	            Username	Password
+1	    Sreekanth, Chirigireddy	        BOA-Git01	P@lmeto@123
+2	    Panneerselvam, Santhoshkumar	BOA-Git02	P@lmeto@123
+3	    J, KRUTHIKA	                    BOA-Git03	P@lmeto@123
+4		Subramanian, Aiswarya          	BOA-Git04	P@lmeto@123
+5	    Kavin, J S	                    BOA-Git05	P@lmeto@123
+6	    Kamalakannan, Bharathi	        BOA-Git06	P@lmeto@123
+7	    Gowthaman, Hariprasath        	BOA-Git07	P@lmeto@123
+8	    Senthilnathan, Chinniah         BOA-Git08	P@lmeto@123
+9	    Uthayakumar, Vimalkumar(Vimal)	BOA-Git09	P@lmeto@123
+10	    Panakkul, Shrijesh	            BOA-Git10	P@lmeto@123
+11	    Bhave, Prasad                	BOA-Git11	P@lmeto@123
+12	    Pravin X	                    BOA-Git12	P@lmeto@123
+13	    Sumathi Shunmugavel	            BOA-Git13	P@lmeto@123
+14	    Sachin P	                    BOA-Git14	P@lmeto@123
+15	    Duraisubramanian Muthu	        BOA-Git15	P@lmeto@123
+16	    Selvam, Rangith 	            BOA-Git16	P@lmeto@123
+17	    K, Karunakaran	                BOA-Git17	P@lmeto@123
+18	    Preetha D	                    BOA-Git18	P@lmeto@123
+19	    Nayak, Ashisa K	                BOA-Git19	P@lmeto@123
+20	    Periyasamy, Mahesh	            BOA-Git20	P@lmeto@123
+21	    Gangaramani, Kamlesh K 	        BOA-Git21	P@lmeto@123
+22	    Sanapiratti Ravi, Balaji 	    BOA-Git22	P@lmeto@123
+23	    Shashanka Shekhar Mishra	    BOA-Git23	P@lmeto@123
+24	    Saurabh Priyadarshi	            BOA-Git24	P@lmeto@123
+25	    Sumera Shaik	                BOA-Git25	P@lmeto@123
+26	    Sibtain Ali	                    BOA-Git26	P@lmeto@123
+27	    Prasanth S	                    BOA-Git27	P@lmeto@123
+
+
+Connect to lab
+---
+
+Poweron lab servers
+---
+
+Open vmware work station 
+    ubuntu 01 -- power on virtual machine
+    windows Server 2019 -- power on virtual machine
+
+Connect to VM
+---
+open "VM login details" note pad
+
+connect to ubuntu via putty
+    hostname: your ubuntu ip from note pad
+    user name and password from note pad
+    
+connect to windows via remote desktop connection 
+
+windows serach - mstsc 
+    hostname: your ubuntu ip from note pad
+    user name and password from note pad
+    
+
+Install missing patches on ubuntu
+---
+
+swich to root user on ubuntu server
+---
+sudo su
+password; palmeto
+
+Get latest repo details
+---
+apt update
+
+install missing patches
+---
+apt upgrade -y
+
+Pre Assessment Link:
+---
+https://forms.cloud.microsoft/r/5H91ctkLU2
+
+Create a github account ir signup
+---
+https://github.com/
+
+start 30 day trail of enterprise
+--
+
+git hub users profile icon -- Enterprise -- start 30 day trial 
+
+select "Enterprise Managed Users"
+
+complete the registration.
+
+swich to personal account
+---
+https://github.com/ 
+
+login with persinal account
+
+Create a repo
+---
+
+github icon -- new
+
+Repository name: javaapp
+visiblity: public
+ADD readme: no
+add .gitignore: No .gitignore
+Add License: no License
+
+Create repository
+
+connect to ubuntu and create a key pair
+----
+sudo su
+
+ssh-keygen
+
+Enter file in which to save the key (/root/.ssh/id_rsa):  press ENTER key
+
+Enter passphrase (empty for no passphrase): press ENTER key
+Enter same passphrase again: press ENTER key
+
+get the content of the public key
+---
+cat /root/.ssh/id_rsa.pub
+
+add the ssh key to the user
+---
+
+user profile -- settings -- SSH and GPG keys 
+    New ssh key
+        Title: ubuntu
+        key type: authendication
+        key: paste the out put of cat command
+    Add SSH key  
+
+Create files in ubuntu
+---
+
+swich to root user home directory
+---
+cd
+
+create a directory and switch to the dir
+---
+mkdir github-actions-training
+cd github-actions-training
+
+Create initial R
+
+Install git
+---
+apt install git -y
+
+initialize the repo
+---
+git init
+
+install tree command
+---
+apt install tree
+
+see the directctory structure of the .git folder
+---
+tree .git
+
+Create initial README
+---
+echo "# GitHub Actions Training Lab Repository" > README.md
+
+setup git config
+---
+git config --global user.email "sathishbabudevops@gmail.com"
+git config --global user.name "sathishbabu"
+
+add the file to staging
+---
+git add .
+
+commit the changes
+---
+git commit -m "initial commit"
+
+get the remote add command from git
+---
+git hub -- your repo -- select ssh -- copy remode add commns
+
+sample command
+---
+git remote add origin git@github.com:{your github id}/{your repo name}.git
+
+change the branch to main
+---
+git branch -M main
+
+push it
+--
+git push -u origin main
+
+yes
+
+Use only if issue to push 
+---
+git remote -v
+git remote rm origin
+
+Add ubuntu runner
+---
+
+Go to your repository
+Click Settings → Actions → Runners
+Click “New self-hosted runner”
+
+Runner Image : Linux
+
+connect to ubuntu
+---
+
+switch to root user home directory
+---
+cd
+
+create a directory for runner
+---
+mkdir actions-runner && cd actions-runner
+
+install curl
+---
+apt install curl -y
+
+Download the latest runner package
+---
+curl -o actions-runner-linux-x64-2.333.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.333.0/actions-runner-linux-x64-2.333.0.tar.gz
+
+Extract the installer
+---
+tar xzf ./actions-runner-linux-x64-2.333.0.tar.gz
+
+
+Create a Non-Root User
+---
+adduser github-runner
+
+add the user to sudo group
+---
+usermod -aG sudo github-runner
+
+swich to the user
+---
+su - github-runner
+
+create a directory for runner
+---
+mkdir actions-runner && cd actions-runner
+
+Download the latest runner package
+---
+curl -o actions-runner-linux-x64-2.333.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.333.0/actions-runner-linux-x64-2.333.0.tar.gz
+
+Extract the installer
+---
+tar xzf ./actions-runner-linux-x64-2.333.0.tar.gz
+
+Create the runner and start the configuration experience
+---
+./config.sh --url https://github.com/{your github id}/{your repo} --token {yur token}
+
+Enter the name of the runner group to add this runner to: [press Enter for Default] Press ENTER
+
+name of the runner: ubunturunner
+
+Enter any additional labels (ex. label-1,label-2): [press Enter to skip] ubunturunner
+
+Enter name of work folder: [press Enter for _work] Press ENTER
+
+Run the runner
+---
+./run.sh
+
+CTRL + c 
+
+Run the agent as service
+--
+sudo ./svc.sh install
+sudo ./svc.sh start
+
