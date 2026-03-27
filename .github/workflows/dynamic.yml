@@ -6,16 +6,22 @@ env:
   APP_TYPE: java   # change to 'dotnet'
 
 jobs:
-  build-java:
-    if: env.APP_TYPE == 'java'
+  setup:
     runs-on: ubuntu-latest
+    outputs:
+      runner: ${{ steps.determine-runner.outputs.runner }}
     steps:
-      - name: Show runner
-        run: echo "Running on $RUNNER_OS"
+      - id: determine-runner
+        run: |
+          if [ "${{ env.APP_TYPE }}" = "java" ]; then
+            echo "runner=ubuntu-latest" >> $GITHUB_OUTPUT
+          else
+            echo "runner=windows-latest" >> $GITHUB_OUTPUT
+          fi
 
-  build-dotnet:
-    if: env.APP_TYPE != 'java'
-    runs-on: windows-latest
+  build:
+    needs: setup
+    runs-on: ${{ needs.setup.outputs.runner }}
     steps:
       - name: Show runner
         run: echo "Running  on $RUNNER_OS"
