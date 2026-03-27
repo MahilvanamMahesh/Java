@@ -15,3 +15,7 @@ jobs:
 
   build-dotnet:
     if: env.APP_TYPE != 'java'
+    runs-on: windows-latest
+    steps:
+      - name: Show runner
+        run: echo "Running on $RUNNER_OS"
