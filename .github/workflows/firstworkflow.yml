@@ -44,7 +44,7 @@ jobs:
         run: |
           echo "Running unit test"
           echo "all tests passes"
-    notify:
+  notify:
     name: Notification Job
     runs-on: ubuntu-latest
     needs: [build, test]
