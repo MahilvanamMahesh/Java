@@ -25,4 +25,3 @@ jobs:
           echo "Step: $STEP_ENV"
           echo "Global: $GLOBAL_ENV"
           echo "Job: $JOB_ENV"
-          
