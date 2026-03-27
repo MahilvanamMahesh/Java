@@ -1,9 +1,7 @@
 name: Explore GitHub Components
 
 on:
-  push:
-    branches: [main]
-  workflow_dispatch:
+  workflow_dispatch
 
 jobs:
   build:
@@ -32,9 +30,7 @@ jobs:
           python3 --version || echo 'Not installed'
           echo "=== Docker ==="
           docker --version || echo 'Not installed'
-      - name: Display my name
-        run: |
-          echo "=== MAhesh ==="
+
   test:
     name: Test Job
     runs-on: ubuntu-latest
@@ -44,6 +40,7 @@ jobs:
         run: |
           echo "Running unit test"
           echo "all tests passes"
+
   notify:
     name: Notification Job
     runs-on: ubuntu-latest
