@@ -1,4 +1,27 @@
-build:
+name: Dynamic App Selector
+
+on: workflow_dispatch
+
+jobs:
+  detect:
+    runs-on: ubuntu-latest
+    outputs:
+      app: ${{ steps.detect-app.outputs.app }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - id: detect-app
+        run: |
+          if [ -f "pom.xml" ] || [ -f "build.gradle" ]; then
+            echo "app=java" >> $GITHUB_OUTPUT
+          elif [ -f "*.csproj" ] || [ -f "*.sln" ]; then
+            echo "app=dotnet" >> $GITHUB_OUTPUT
+          else
+            echo "app=unknown" >> $GITHUB_OUTPUT
+          fi
+
+  build:
     needs: detect
     runs-on: ${{ needs.detect.outputs.app == 'java' && 'ubuntu-latest' || 'windows-latest' }}
 
@@ -9,7 +32,7 @@ build:
       - name: Print detected app
         run: echo "App is ${{ needs.detect.outputs.app }}"
 
-      #Java Build
+      # Java Build
       - name: Set up JDK
         if: needs.detect.outputs.app == 'java'
         uses: actions/setup-java@v4
@@ -45,4 +68,3 @@ build:
         if: needs.detect.outputs.app == 'unknown'
         run: |
           echo "Unsupported project type"
-  
