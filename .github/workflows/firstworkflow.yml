@@ -32,3 +32,6 @@ jobs:
           python3 --version || echo 'Not installed'
           echo "=== Docker ==="
           docker --version || echo 'Not installed'
+      - name: Display my name
+        run: |
+          echo "=== MAhesh ==="
