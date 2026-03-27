@@ -9,7 +9,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    environment: devlop  
+    environment:   
 
     steps:
       - name: Use environment variables
