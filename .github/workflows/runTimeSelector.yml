@@ -3,7 +3,7 @@ name: Dynamic Runner selector
 on: workflow_dispatch
 
 env:
-  APP_TYPE: java   # change to 'dotnet'
+  APP_TYPE: dotnet   # change to 'dotnet'
 
 jobs:
   determine-runner:
