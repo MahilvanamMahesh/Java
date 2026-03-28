@@ -1,0 +1,1272 @@
+Welcome to Github Action Trainings
+===
+
+Lab URL	https://digitallabs.palmeto.co.in
+
+No    	Participant Name	            Username	Password
+1	    Sreekanth, Chirigireddy	        BOA-Git01	P@lmeto@123
+2	    Panneerselvam, Santhoshkumar	BOA-Git02	P@lmeto@123
+3	    J, KRUTHIKA	                    BOA-Git03	P@lmeto@123
+4		Subramanian, Aiswarya          	BOA-Git04	P@lmeto@123
+5	    Kavin, J S	                    BOA-Git05	P@lmeto@123
+6	    Kamalakannan, Bharathi	        BOA-Git06	P@lmeto@123
+7	    Gowthaman, Hariprasath        	BOA-Git07	P@lmeto@123
+8	    Senthilnathan, Chinniah         BOA-Git08	P@lmeto@123
+9	    Uthayakumar, Vimalkumar(Vimal)	BOA-Git09	P@lmeto@123
+10	    Panakkul, Shrijesh	            BOA-Git10	P@lmeto@123
+11	    Bhave, Prasad                	BOA-Git11	P@lmeto@123
+12	    Pravin X	                    BOA-Git12	P@lmeto@123
+13	    Sumathi Shunmugavel	            BOA-Git13	P@lmeto@123
+14	    Sachin P	                    BOA-Git14	P@lmeto@123
+15	    Duraisubramanian Muthu	        BOA-Git15	P@lmeto@123
+16	    Selvam, Rangith 	            BOA-Git16	P@lmeto@123
+17	    K, Karunakaran	                BOA-Git17	P@lmeto@123
+18	    Preetha D	                    BOA-Git18	P@lmeto@123
+19	    Nayak, Ashisa K	                BOA-Git19	P@lmeto@123
+20	    Periyasamy, Mahesh	            BOA-Git20	P@lmeto@123
+21	    Gangaramani, Kamlesh K 	        BOA-Git21	P@lmeto@123
+22	    Sanapiratti Ravi, Balaji 	    BOA-Git22	P@lmeto@123
+23	    Shashanka Shekhar Mishra	    BOA-Git23	P@lmeto@123
+24	    Saurabh Priyadarshi	            BOA-Git24	P@lmeto@123
+25	    Sumera Shaik	                BOA-Git25	P@lmeto@123
+26	    Sibtain Ali	                    BOA-Git26	P@lmeto@123
+27	    Prasanth S	                    BOA-Git27	P@lmeto@123
+
+
+Connect to lab
+---
+
+Poweron lab servers
+---
+
+Open vmware work station 
+    ubuntu 01 -- power on virtual machine
+    windows Server 2019 -- power on virtual machine
+
+Connect to VM
+---
+open "VM login details" note pad
+
+connect to ubuntu via putty
+    hostname: your ubuntu ip from note pad
+    user name and password from note pad
+    
+connect to windows via remote desktop connection 
+
+windows serach - mstsc 
+    hostname: your ubuntu ip from note pad
+    user name and password from note pad
+    
+
+Install missing patches on ubuntu
+---
+
+swich to root user on ubuntu server
+---
+sudo su
+password; palmeto
+
+Get latest repo details
+---
+apt update
+
+install missing patches
+---
+apt upgrade -y
+
+Pre Assessment Link:
+---
+https://forms.cloud.microsoft/r/5H91ctkLU2
+
+Create a github account ir signup
+---
+https://github.com/
+
+start 30 day trail of enterprise
+--
+
+git hub users profile icon -- Enterprise -- start 30 day trial 
+
+select "Enterprise Managed Users"
+
+complete the registration.
+
+swich to personal account
+---
+https://github.com/ 
+
+login with persinal account
+
+Create a repo
+---
+
+github icon -- new
+
+Repository name: javaapp
+visiblity: public
+ADD readme: no
+add .gitignore: No .gitignore
+Add License: no License
+
+Create repository
+
+connect to ubuntu and create a key pair
+----
+sudo su
+
+ssh-keygen
+
+Enter file in which to save the key (/root/.ssh/id_rsa):  press ENTER key
+
+Enter passphrase (empty for no passphrase): press ENTER key
+Enter same passphrase again: press ENTER key
+
+get the content of the public key
+---
+cat /root/.ssh/id_rsa.pub
+
+add the ssh key to the user
+---
+
+user profile -- settings -- SSH and GPG keys 
+    New ssh key
+        Title: ubuntu
+        key type: authendication
+        key: paste the out put of cat command
+    Add SSH key  
+
+Create files in ubuntu
+---
+
+swich to root user home directory
+---
+cd
+
+create a directory and switch to the dir
+---
+mkdir github-actions-training
+cd github-actions-training
+
+Create initial R
+
+Install git
+---
+apt install git -y
+
+initialize the repo
+---
+git init
+
+install tree command
+---
+apt install tree
+
+see the directctory structure of the .git folder
+---
+tree .git
+
+Create initial README
+---
+echo "# GitHub Actions Training Lab Repository" > README.md
+
+setup git config
+---
+git config --global user.email "sathishbabudevops@gmail.com"
+git config --global user.name "sathishbabu"
+
+add the file to staging
+---
+git add .
+
+commit the changes
+---
+git commit -m "initial commit"
+
+get the remote add command from git
+---
+git hub -- your repo -- select ssh -- copy remode add commns
+
+sample command
+---
+git remote add origin git@github.com:{your github id}/{your repo name}.git
+
+change the branch to main
+---
+git branch -M main
+
+push it
+--
+git push -u origin main
+
+yes
+
+Use only if issue to push 
+---
+git remote -v
+git remote rm origin
+
+Add ubuntu runner
+---
+
+Go to your repository
+Click Settings → Actions → Runners
+Click “New self-hosted runner”
+
+Runner Image : Linux
+
+connect to ubuntu
+---
+
+switch to root user home directory
+---
+cd
+
+create a directory for runner
+---
+mkdir actions-runner && cd actions-runner
+
+install curl
+---
+apt install curl -y
+
+Download the latest runner package
+---
+curl -o actions-runner-linux-x64-2.333.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.333.0/actions-runner-linux-x64-2.333.0.tar.gz
+
+Extract the installer
+---
+tar xzf ./actions-runner-linux-x64-2.333.0.tar.gz
+
+
+Create a Non-Root User
+---
+adduser github-runner
+
+add the user to sudo group
+---
+usermod -aG sudo github-runner
+
+swich to the user
+---
+su - github-runner
+
+create a directory for runner
+---
+mkdir actions-runner && cd actions-runner
+
+Download the latest runner package
+---
+curl -o actions-runner-linux-x64-2.333.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.333.0/actions-runner-linux-x64-2.333.0.tar.gz
+
+Extract the installer
+---
+tar xzf ./actions-runner-linux-x64-2.333.0.tar.gz
+
+Create the runner and start the configuration experience
+---
+./config.sh --url https://github.com/{your github id}/{your repo} --token {yur token}
+
+Enter the name of the runner group to add this runner to: [press Enter for Default] Press ENTER
+
+name of the runner: ubunturunner
+
+Enter any additional labels (ex. label-1,label-2): [press Enter to skip] ubunturunner
+
+Enter name of work folder: [press Enter for _work] Press ENTER
+
+Run the runner
+---
+./run.sh
+
+CTRL + c 
+
+Run the agent as service
+--
+sudo ./svc.sh install
+sudo ./svc.sh start
+
+
+Day 2
+===
+
+Add windows agent
+---
+
+connect to windows VM via RDP
+
+open powershell
+---
+
+windows search -- powershell
+
+switch to c:\ directory
+--
+cd c:\
+
+Create a folder under the drive root
+---
+mkdir actions-runner; cd actions-runner
+
+Download the latest runner package
+---
+Invoke-WebRequest -Uri https://github.com/actions/runner/releases/download/v2.333.0/actions-runner-win-x64-2.333.0.zip -OutFile actions-runner-win-x64-2.333.0.
+
+Extract the installer
+----
+Add-Type -AssemblyName System.IO.Compression.FileSystem ; [System.IO.Compression.ZipFile]::ExtractToDirectory("$PWD/actions-runner-win-x64-2.333.0.zip", "$PWD")
+
+configure
+---
+./config.cmd --url https://github.com/{your github id}/{your repo name} --token {your token}
+
+Enter the name of the runner group to add this runner to: [press Enter for Default -- Press ENTER
+
+Enter the name of runner: [press Enter for WIN-5LQ9955JE3K] -- windowsrunner
+
+This runner will have the following labels: 'self-hosted', 'Windows', 'X64'
+Enter any additional labels (ex. label-1,label-2): [press Enter to skip] -- windowsrunner
+
+Enter name of work folder: [press Enter for _work] -- Press ENTER
+
+√ Settings Saved.
+
+Would you like to run the runner as service? (Y/N) [press Enter for N] Y
+
+install vscode
+--
+
+in the base windows machine downaload
+--
+https://code.visualstudio.com/download
+
+downlaod windows
+
+and install abd select your theam.
+
+connect to repii
+---
+click "connect to"
+
+remote repo
+
+select "open repo github"
+
+allow
+
+once auth is done open your repo
+
+create workflow folder
+---
+Create folder
+.github
+
+inside this create the folder
+workflows
+
+create file under workflow
+firstworkflow.yml
+
+actions list
+---
+https://github.com/marketplace?type=actions
+
+name: Explore GitHub Components
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build job
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: Display runner info
+        run: |
+          echo "Runner os: $RUNNER_OS"
+          echo "Runner Atch: $RUNNER_ARCH"
+          echo "workspace: $GITHUB_WORKSPACE"
+          echo "Repository: $GITHUB_REPOSITORY"
+          echo "Event: $GITHUB_EVENT_NAME"
+          echo "SHA: $GITHUB_SHA"
+          
+save the file commit and push
+
+check the action execution
+---
+repo -- action
+
+update the code to print versions of the tolls avaliable
+---
+name: Explore GitHub Components
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build job
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v6
+
+      - name: Display runner info
+        run: |
+          echo "Runner os: $RUNNER_OS"
+          echo "Runner Atch: $RUNNER_ARCH"
+          echo "workspace: $GITHUB_WORKSPACE"
+          echo "Repository: $GITHUB_REPOSITORY"
+          echo "Event: $GITHUB_EVENT_NAME"
+          echo "SHA: $GITHUB_SHA"
+
+      - name: List installed tools
+        run: |
+          echo "=== Java ==="
+          java -version 2>&1 || echo 'Not installed'
+          echo "=== Node ==="
+          node --version || echo 'Not installed'
+          echo "=== Python ==="
+          python3 --version || echo 'Not installed'
+          echo "=== Docker ==="
+          docker --version || echo 'Not installed'
+
+save the file commit and push
+
+check the action execution
+---
+repo -- action
+
+add a test job to the workflow
+---
+name: Explore GitHub Components
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build job
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v6
+
+      - name: Display runner info
+        run: |
+          echo "Runner os: $RUNNER_OS"
+          echo "Runner Atch: $RUNNER_ARCH"
+          echo "workspace: $GITHUB_WORKSPACE"
+          echo "Repository: $GITHUB_REPOSITORY"
+          echo "Event: $GITHUB_EVENT_NAME"
+          echo "SHA: $GITHUB_SHA"
+
+      - name: List installed tools
+        run: |
+          echo "=== Java ==="
+          java -version 2>&1 || echo 'Not installed'
+          echo "=== Node ==="
+          node --version || echo 'Not installed'
+          echo "=== Python ==="
+          python3 --version || echo 'Not installed'
+          echo "=== Docker ==="
+          docker --version || echo 'Not installed'
+
+  test:
+    name: Test Job
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Run Mock test
+        run: |
+          echo "Running unit test"
+          echo "all tests passes"
+          
+
+
+
+
+add always run job
+---
+name: Explore GitHub Components
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build job
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v6
+
+      - name: Display runner info
+        run: |
+          echo "Runner os: $RUNNER_OS"
+          echo "Runner Atch: $RUNNER_ARCH"
+          echo "workspace: $GITHUB_WORKSPACE"
+          echo "Repository: $GITHUB_REPOSITORY"
+          echo "Event: $GITHUB_EVENT_NAME"
+          echo "SHA: $GITHUB_SHA"
+
+      - name: List installed tools
+        run: |
+          echo "=== Java ==="
+          java -version 2>&1 || echo 'Not installed'
+          echo "=== Node ==="
+          node --version || echo 'Not installed'
+          echo "=== Python ==="
+          python3 --version || echo 'Not installed'
+          echo "=== Docker ==="
+          docker --version || echo 'Not installed'
+
+  test:
+    name: Test Job
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Run Mock test
+        run: |
+          echo "Running unit test"
+          echo "all tests passes"
+
+  notify:
+    name: Notification Job
+    runs-on: ubuntu-latest
+    needs: [build, test]
+    if: always()
+    steps:
+      - name: Send notification
+        run: echo "Build and test complete for $GITHUB_SHA"
+
+save the file commit and push
+
+check the action execution
+---
+repo -- action
+
+Environment variables
+---
+create new workflow file envvars.yml
+
+name: Env Variables Demo
+
+on: workflow_dispatch
+
+env:
+  GLOBAL_ENV: "global-value"
+
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+
+    env:
+      JOB_ENV: "job-value"
+
+    steps:
+      - name: Print all env vars
+        run: |
+          echo "Global: $GLOBAL_ENV"
+          echo "Job: $JOB_ENV"
+
+      - name: Step-level env
+        env:
+          STEP_ENV: "step-value"
+        run: |
+          echo "Step: $STEP_ENV"
+          echo "Global: $GLOBAL_ENV"
+          echo "Job: $JOB_ENV"
+          
+save the file commit and push
+
+check the action execution
+---
+repo -- action
+
+Env Variables Demo
+
+run work flow
+
+Create 3 environment
+---
+Repo → Settings → Environments -- new environments
+
+development
+test
+production
+
+Open production and add 2 variables
+---
+API_URL = https://prod.api.com
+APP_MODE = production
+
+remove automatic trigger on firstworkflow.yml
+---
+name: Explore GitHub Components
+
+on:
+  workflow_dispatch
+
+jobs:
+  build:
+    name: Build job
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v6
+
+      - name: Display runner info
+        run: |
+          echo "Runner os: $RUNNER_OS"
+          echo "Runner Atch: $RUNNER_ARCH"
+          echo "workspace: $GITHUB_WORKSPACE"
+          echo "Repository: $GITHUB_REPOSITORY"
+          echo "Event: $GITHUB_EVENT_NAME"
+          echo "SHA: $GITHUB_SHA"
+
+      - name: List installed tools
+        run: |
+          echo "=== Java ==="
+          java -version 2>&1 || echo 'Not installed'
+          echo "=== Node ==="
+          node --version || echo 'Not installed'
+          echo "=== Python ==="
+          python3 --version || echo 'Not installed'
+          echo "=== Docker ==="
+          docker --version || echo 'Not installed'
+
+  test:
+    name: Test Job
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Run Mock test
+        run: |
+          echo "Running unit test"
+          echo "all tests passes"
+
+  notify:
+    name: Notification Job
+    runs-on: ubuntu-latest
+    needs: [build, test]
+    if: always()
+    steps:
+      - name: Send notification
+        run: echo "Build and test complete for $GITHUB_SHA"
+        
+save the file
+
+Modify envvars.yml to use the variables from environment
+----
+name: Env Variables Demo
+
+on: workflow_dispatch
+
+env:
+  GLOBAL_ENV: "global-value"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    environment: production  
+
+    steps:
+      - name: Use environment variables
+        env:
+          API_URL: ${{ vars.API_URL }}
+          APP_MODE: ${{ vars.APP_MODE }}
+        run: |
+          echo "API URL: $API_URL"
+          echo "App Mode: $APP_MODE"
+          
+save the file
+
+Commot and push
+
+run work flow
+
+dynamic runners for refernce
+---
+name: Dynamic Runner
+
+on: workflow_dispatch
+
+env:
+  APP_TYPE: java   # change to 'dotnet'
+
+jobs:
+  build:
+    runs-on: ${{ env.APP_TYPE == 'java' && 'ubuntu-latest' || 'windows-latest' }}
+
+    steps:
+      - name: Show runner
+        run: echo "Running on $RUNNER_OS"
+        
+        
+secrets in workflow
+---
+Open production and add 1 secret
+---
+DB_PASSWORD some value
+
+modify the workflow yaml
+---
+
+name: Env Variables Demo
+
+on: workflow_dispatch
+
+env:
+  GLOBAL_ENV: "global-value"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    environment: production  
+
+    steps:
+      - name: Use environment variables
+        env:
+          API_URL: ${{ vars.API_URL }}
+          DB_PASS: ${{ secrets.DB_PASSWORD }}
+        run: |
+          echo "Deploying to $API_URL"
+          echo "DB password length: ${#DB_PASS}"
+          echo "DB password is ${DB_PASS}"
+          
+save the file
+
+Commot and push
+
+run work flow
+
+Try to print secret
+---
+
+name: Env Variables Demo
+
+on: workflow_dispatch
+
+env:
+  GLOBAL_ENV: "global-value"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    environment: production  
+
+    steps:
+      - name: Use environment variables
+        env:
+          API_URL: ${{ vars.API_URL }}
+          DB_PASS: ${{ secrets.DB_PASSWORD }}
+        run: |
+          echo "Deploying to $API_URL"
+          echo "DB password length: ${#DB_PASS}"
+          echo "DB password is ${DB_PASS}"
+
+      - name: Write secret to file
+        run: |
+          echo "$DB_PASS" > secret.txt
+        env:
+          DB_PASS: ${{ secrets.DB_PASSWORD }}
+
+      - name: Print file
+        run: cat secret.txt
+        
+save the file
+
+Commit and push
+
+run work flow
+
+dynamic runner
+---
+name: Smart Build Pipeline
+
+on:
+  workflow_dispatch:
+
+jobs:
+  # 🔍 Detect application type
+  detect:
+    runs-on: ubuntu-latest
+    outputs:
+      app: ${{ steps.detect.outputs.app }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Detect application type
+        id: detect
+        run: |
+          if [ -f "pom.xml" ] || [ -f "build.gradle" ]; then
+            echo "Detected Java project"
+            echo "app=java" >> $GITHUB_OUTPUT
+          elif ls *.csproj 1> /dev/null 2>&1; then
+            echo "Detected .NET project"
+            echo "app=dotnet" >> $GITHUB_OUTPUT
+          else
+            echo "Unknown project type"
+            echo "app=unknown" >> $GITHUB_OUTPUT
+          fi
+
+  # 🏗️ Build job (dynamic runner selection)
+  build:
+    needs: detect
+    runs-on: ${{ needs.detect.outputs.app == 'java' && 'ubuntu-latest' || 'windows-latest' }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Print detected app
+        run: echo "App is ${{ needs.detect.outputs.app }}"
+
+      # ☕ Java Build
+      - name: Set up JDK
+        if: needs.detect.outputs.app == 'java'
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Build Java (Maven)
+        if: needs.detect.outputs.app == 'java' && hashFiles('pom.xml') != ''
+        run: mvn clean install -B
+
+      - name: Build Java (Gradle)
+        if: needs.detect.outputs.app == 'java' && hashFiles('build.gradle') != ''
+        run: ./gradlew build
+
+      # 🟣 .NET Build
+      - name: Setup .NET
+        if: needs.detect.outputs.app == 'dotnet'
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore dependencies
+        if: needs.detect.outputs.app == 'dotnet'
+        run: dotnet restore
+
+      - name: Build .NET
+        if: needs.detect.outputs.app == 'dotnet'
+        run: dotnet build --configuration Release
+
+      # ❌ Fail if unknown
+      - name: Fail if unknown app
+        if: needs.detect.outputs.app == 'unknown'
+        run: |
+          echo "Unsupported project type"
+          exit 1
+
+save the file
+
+Commit and push
+
+run work flow
+
+
+Matrix staergy in pipeline
+--
+matrix.yml
+
+name: Matrix Demo
+
+on: workflow_dispatch
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [18, 20]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Print config
+        run: |
+          echo "OS: ${{ matrix.os }}"
+          echo "Node: ${{ matrix.node }}"
+          
+save the file
+
+Commit and push
+
+run work flow
+
+
+condition in workflow with condition.yml
+---
+
+name: Condition Demo
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - run: echo "Running on main branch"
+
+save the file
+
+Commit and push
+
+run work flow with main branch
+
+
+Create a dev branch
+--
+
+repo -- brach -- new branch "dev"
+
+run work flow with dev branch
+
+step level condition
+---
+name: Condition Demo
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Step 1
+        run: echo "Hello"
+
+      - name: step 2
+        if: failure()
+        run: echo "Runs only if Step 1 failled"
+
+
+save the file
+
+Commit and push
+
+run work flow
+
+condition based on user input
+---
+name: Condition Demo
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        required: true
+        default: dev
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.event.inputs.environment == 'prod'
+
+    steps:
+      - run: echo "Deploying to Production"
+      
+save the file
+
+Commit and push
+
+run work flow with value for environment as dev (default)
+
+run work flow with value for environment as prod (default)
+
+step condition on user input
+---
+name: Condition Demo
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        required: true
+        default: dev
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Always Run Step
+        run: echo "This step always runs"
+
+      - name: Deploy to Production
+        if: github.event.inputs.environment == 'prod'
+        run: echo "Deploying to Production"
+        
+save the file
+
+Commit and push
+
+run work flow with value for environment as dev (default)
+
+run work flow with value for environment as prod (default)
+
+input types input.yml
+---
+name: Advanced Input Demo
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        options: [dev, stage, prod]
+      run_tests:
+        type: boolean
+        default: true
+      retry_count:
+        type: number
+        default: 1
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Always Run
+        run: echo "Pipeline started"
+
+      - name: Run Tests
+        if: github.event.inputs.run_tests == 'true'
+        run: echo "Executing tests"
+
+      - name: Deploy to Dev
+        if: github.event.inputs.environment == 'dev'
+        run: echo "Deploying to Dev"
+
+      - name: Deploy to Prod
+        if: github.event.inputs.environment == 'prod'
+        run: echo "Deploying to Production"
+
+      - name: Retry Logic
+        if: github.event.inputs.retry_count > 1
+        run: echo "Retries enabled"
+        
+save the file
+
+Commit and push
+
+run work flow with default value
+
+multiple condition allcondition.yaml
+---
+name: All Conditions Demo
+
+on:
+  push:
+    branches: [main, dev]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Target environment"
+        required: true
+        default: dev
+
+env:
+  ENVIRONMENT: prod
+
+jobs:
+
+  # 🔹 1. Job runs only on main branch + push
+  build:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - name: Print context
+        run: |
+          echo "Branch: ${{ github.ref }}"
+          echo "Event: ${{ github.event_name }}"
+
+      - name: Step runs only if previous succeeds
+        if: success()
+        run: echo "Previous step succeeded"
+
+      - name: Run only if commit message contains 'deploy'
+        if: contains(github.event.head_commit.message, 'deploy')
+        run: echo "Deploy keyword detected"
+
+      - name: Skip bot user
+        if: github.actor != 'dependabot[bot]'
+        run: echo "Not triggered by bot"
+
+
+  # 🔹 2. Job using workflow_dispatch input
+  deploy-input:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'prod'
+
+    steps:
+      - run: echo "Manual deployment to PROD"
+
+
+  # 🔹 3. Env condition (moved to step level)
+  env-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run only if env is prod
+        if: env.ENVIRONMENT == 'prod'
+        run: echo "Environment is PROD"
+
+
+  # 🔹 4. Matrix job with condition
+  matrix-test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [18, 20]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Print matrix config
+        run: |
+          echo "OS: ${{ matrix.os }}"
+          echo "Node: ${{ matrix.node }}"
+
+      - name: Run only on Ubuntu
+        if: matrix.os == 'ubuntu-latest'
+        run: echo "Running Ubuntu-specific step"
+
+
+  # 🔹 5. Secrets check (fixed using env mapping)
+  secrets-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check secret safely
+        env:
+          MY_SECRET: ${{ secrets.MY_SECRET }}
+        if: env.MY_SECRET != ''
+        run: echo "Secret is configured"
+
+
+  # 🔹 6. Failure handling example
+  failure-demo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Force failure
+        run: exit 1
+
+      - name: Runs only on failure
+        if: failure()
+        run: echo "Previous step failed"
+
+      - name: Always runs
+        if: always()
+        run: echo "Cleanup step"
+
+
+  # 🔹 7. Combined logical conditions
+  combined-condition:
+    runs-on: ubuntu-latest
+    if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev') && github.event_name == 'push'
+
+    steps:
+      - run: echo "Running on main OR dev branch"
+
+
+  # 🔹 8. Cancel condition example
+  cancel-demo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Dummy step
+        run: echo "Simulating job"
+
+      - name: Runs if cancelled
+        if: cancelled()
+        run: echo "Workflow was cancelled"
+        
+save the file
+
+Commit with "deploy" in the commit message and push
+
+view the action execution
+
+run work flow with default value
+
+scheduled and parallel scheduled .yaml
+---
+name: scheduled Pipeline
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Running tests"
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Linting code"
+
+  report:
+    runs-on: ubuntu-latest
+    needs: [test, lint]
+    steps:
+      - run: echo "Generating report"
+      
+save the file
+
+remove on push in allcondition.ymal
+
+Commit  and push
+
+view the action execution
+
+chnange the schedule to run at 9:00 am
+---
+name: scheduled Pipeline
+
+on:
+  schedule:
+    - cron: "0 9 * * *"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Running tests"
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Linting code"
+
+  report:
+    runs-on: ubuntu-latest
+    needs: [test, lint]
+    steps:
+      - run: echo "Generating report"
