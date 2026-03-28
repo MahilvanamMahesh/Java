@@ -13,7 +13,7 @@ jobs:
     steps:
       - id: set-runner
         run: |
-          if [ "${{ env.APP_TYPE }}" = "java" ]; then
+          if [ "${{ env.APP_TYPE }}" == "java" ]; then
             echo "runner=ubuntu-latest" >> $GITHUB_OUTPUT
           else
             echo "runner=windows-latest" >> $GITHUB_OUTPUT
