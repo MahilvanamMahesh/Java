@@ -1,4 +1,4 @@
-name: Java Apllication Build - Publish Step
+name: Java Apllication Build -  Publish Test Report
 
 on:
   workflow_dispatch:
@@ -37,4 +37,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: java-demo-artifact
-          path: target/*.jar
+          path: target/*.jar 
