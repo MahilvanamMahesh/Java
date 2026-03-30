@@ -1,0 +1,9 @@
+name: Java workflow
+
+on:
+  workflow_dispatch
+
+jobs:
+  build:
+    name: Build job
+    runs-on: ubuntu-latest
